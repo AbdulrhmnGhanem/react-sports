@@ -5,9 +5,9 @@ import ActionButton from "./ActionButton";
 import ThemeSelector from "./ThemeSelector";*/
 import GeneralList from "./GeneralList";
 import SortedList from "./SortedList";
-import ProFeature from "./ProFeature";
-
-const ProList = ProFeature(SortedList);
+// import ProFeature from "./ProFeature";
+import ProController from "./ProController";
+const ProList = ProController(SortedList);
 
 class App extends React.Component {
 
@@ -44,13 +44,13 @@ class App extends React.Component {
               <GeneralList list={this.state.names} theme="primary" />
             </div>
             <div className="col-3 ">
-              <ProList list={this.state.names} pro={this.state.proMode}/>
+              <ProList list={this.state.names} />
             </div>
             <div className="col-3">
               <GeneralList list={ this.state.cities } theme="primary" />
             </div>
             <div className="col-3 ">
-              <ProList list={this.state.cities} pro={this.state.proMode}/>
+              <ProList list={this.state.cities} />
             </div>
 
           </div>
