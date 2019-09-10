@@ -4,7 +4,7 @@ import Selector from "./components/Selector";
 import ProductDisplay from "./components/products/ProductDisplay";
 import SupplierDisplay from "./components/suppliers/SupplierDisplay";
 
-export default class ProductsAndSuppliers extends Component {
+export default class ProductsAndSuppliers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
