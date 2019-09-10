@@ -5,10 +5,14 @@ import ProductEditor from "./ProductEditor";
 
 class ProductDisplay extends React.Component {
 
-    state = {
-        showEditor: false,
-        selectedProduct: null
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showEditor: false,
+            selectedProduct: null
+        }
+    }
+
 
     edit = product => {
         this.setState({ showEditor: true, selectedProduct: product })
@@ -43,7 +47,7 @@ class ProductDisplay extends React.Component {
         } else {
             return (
                 <div className="m-2">
-                    <ProductTable products={ this.props.product }
+                    <ProductTable products={ this.props.products }
                                   editCallback={ this.edit }
                                   deleteCallback={ this.props.deleteCallback } />
                     <div className="text-center">
@@ -60,4 +64,4 @@ class ProductDisplay extends React.Component {
 
 }
 
-export default ProductEditor;
+export default ProductDisplay;
