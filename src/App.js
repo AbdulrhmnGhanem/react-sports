@@ -10,8 +10,8 @@ const App = () => {
   return (
       <Provider store={ dataStore }>
         <Selector>
-          <ProductDisplay/>
-          <SupplierDisplay/>
+          <ProductDisplay name="Products" />
+          <SupplierDisplay name="Suppliers" />
         </Selector>
       </Provider>
   )

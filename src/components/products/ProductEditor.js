@@ -39,7 +39,7 @@ class ProductEditor extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>Category</label>
-                    <input className="form-control" name="id"
+                    <input className="form-control" name="category"
                            value={ this.state.formData.category }
                            onChange={ this.handleChange } />
                 </div>
