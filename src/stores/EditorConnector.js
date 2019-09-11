@@ -14,11 +14,13 @@ const EditorConnector = (dataType, presentationComponent) => {
             .find(s => s.id === storeData.stateData.selectedId) || {}
     });
 
-    const mapDispatchToProps = {
-        cancelCallback: endEditing,
-        saveCallback: dataType === PRODUCTS ? saveProduct: saveSupplier
-
-    };
+    const mapDispatchToProps = dispatch =>({
+        cancelCallback: () => dispatch(endEditing()),
+        saveCallback: data => {
+            dispatch((dataType === PRODUCTS ? saveProduct: saveSupplier)(data));
+            dispatch(endEditing());
+        }
+        });
 
     return connect(mapStateToProps, mapDispatchToProps)(presentationComponent)
 };

@@ -8,7 +8,7 @@ export const actionReducer = (storeData, action) => {
         case STORE:
             return {
                 ...storeData,
-                [action.dataType]: storeData[action.dataType].concat()
+                [action.dataType]: storeData[action.dataType].concat([action.payload])
             };
         case UPDATE:
             return {

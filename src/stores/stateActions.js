@@ -25,6 +25,7 @@ export const startCreatingProduct = () => ({
     type: STATE_START_CREATING,
     dataType: PRODUCTS
 });
+
 export const startCreatingSupplier = () => ({
     type: STATE_START_CREATING,
     dataType: SUPPLIERS

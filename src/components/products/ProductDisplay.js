@@ -3,16 +3,23 @@ import { connect } from 'react-redux';
 
 import ProductTable from "./ProductTable";
 import ProductEditor from "./ProductEditor";
-import { saveProduct, deleteProduct  } from "../../stores";
+import EditorConnector from "../../stores/EditorConnector";
+import TableConnector from "../../stores/TableConnector";
+import {PRODUCTS} from "../../stores/dataTypes";
+import {startCreatingProduct} from "../../stores/stateActions";
 
+
+const ConnectedEditor = EditorConnector(PRODUCTS, ProductEditor);
+const ConnectedTable = TableConnector(PRODUCTS, ProductTable);
 
 const mapStateToProps = storeData => ({
-    products: storeData.products
+    edit: storeData.stateData.edit,
+    selected: storeData.modelData.products
+        .find(p => p.id === storeData.stateData.selectedId)
 });
 
 const mapDispatchToProps = {
-    saveCallback: saveProduct,
-    deleteCallback: deleteProduct
+    createProduct: startCreatingProduct
 };
 
 const connection = connect(mapStateToProps, mapDispatchToProps);
@@ -20,61 +27,22 @@ const connection = connect(mapStateToProps, mapDispatchToProps);
 export const ProductDisplay = connection (
     class extends React.Component {
 
-        constructor(props) {
-            super(props);
-            this.state = {
-                showEditor: false,
-                selectedProduct: null
-            }
-        }
-
-
-        edit = product => {
-            this.setState({showEditor: true, selectedProduct: product})
-        };
-
-        createProduct = () => {
-            this.setState({showEditor: true, selectedProduct: {}})
-        };
-
-        cancelEdit = () => {
-            this.setState({showEditor: false, selectedProduct: null})
-        };
-
-        saveProduct = (product) => {
-            this.props.saveCallback(product);
-            this.setState({showEditor: false, selectedProduct: null})
-        };
-
-        renderEditor = () => {
-            return (
-                <ProductEditor key={this.state.selectedProduct.id || -1}
-                               product={this.state.selectedProduct}
-                               saveCallback={this.saveProduct}
-                               cancelCallback={this.cancelEdit}/>
-            )
-        };
-
         render() {
 
-            if (this.state.showEditor) {
-                return this.renderEditor()
+            if (this.props.edit) {
+                return <ConnectedEditor key={this.props.selectedId || -1} />
             } else {
                 return (
                     <div className="m-2">
-                        <ProductTable products={this.props.products}
-                                      editCallback={this.edit}
-                                      deleteCallback={this.props.deleteCallback}/>
+                        <ConnectedTable />
                         <div className="text-center">
                             <button className="btn btn-primary m-1"
-                                    onClick={this.createProduct}>
-                                CreateProduct
+                                    onClick={this.props.createProduct}>
+                                Create Product
                             </button>
                         </div>
                     </div>
                 )
             }
-
         }
-
     });

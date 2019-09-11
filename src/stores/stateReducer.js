@@ -20,7 +20,7 @@ export const actionReducer = (storeData, action) => {
             return {
                 ...storeData,
                 edit: false
-            }
+            };
         default:
             return storeData || initialData.stateData
 
