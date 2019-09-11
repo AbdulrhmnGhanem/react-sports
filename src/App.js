@@ -1,13 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import ProductsAndSuppliers from "./ProductsAndSuppliers";
 import dataStore from './stores';
+import Selector from "./components/Selector";
+import { ProductDisplay } from "./components/products/ProductDisplay";
+import { SupplierDisplay } from "./components/suppliers/SupplierDisplay";
 
 const App = () => {
   return (
-      <Provider store={dataStore}>
-        <ProductsAndSuppliers/>
+      <Provider store={ dataStore }>
+        <Selector>
+          <ProductDisplay/>
+          <SupplierDisplay/>
+        </Selector>
       </Provider>
   )
 };
