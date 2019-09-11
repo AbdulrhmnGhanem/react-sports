@@ -1,63 +1,76 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import SupplierEditor from "./SupplierEditor";
 import SupplierTable from "./SupplierTable";
+import { saveSupplier, deleteSupplier } from "../../stores";
 
-class SupplierDisplay extends React.Component {
 
-    state = {
-        showEditor: false,
-        selected: null
-    };
+const mapStateToProps = storeData => ({
+    suppliers: storeData.suppliers
+});
 
-    edit = supplier => {
-        this.setState({
-            showEditor: true,
-            selected: supplier
-        })
-    };
+const mapDispatchToProps = {
+    saveCallback: saveSupplier,
+    deleteCallback: deleteSupplier
+};
 
-    createSupplier = () => {
-        this.setState({ showEditor: true, selected: {} })
-    };
+const connection = connect(mapStateToProps, mapDispatchToProps);
 
-    cancelEdit = () => {
-        this.setState({ showEditor: false, selected: null })
-    };
+export const SupplierDisplay = connection(
+    class extends React.Component {
 
-    saveSupplier = supplier => {
-        this.props.saveCallback(supplier);
-        this.setState({ showEditor: false, selected: null })
-    };
+        state = {
+            showEditor: false,
+            selected: null
+        };
 
-    renderSupplierEditor = () => {
-      return <SupplierEditor key={ this.state.selected.id }
-                             supplier={ this.state.selected }
-                             saveCallback={ this.saveSupplier }
-                             cancelCallback={ this.cancelEdit} />
-    };
+        edit = supplier => {
+            this.setState({
+                showEditor: true,
+                selected: supplier
+            })
+        };
 
-    render() {
-        if (this.state.showEditor) {
+        createSupplier = () => {
+            this.setState({showEditor: true, selected: {}})
+        };
+
+        cancelEdit = () => {
+            this.setState({showEditor: false, selected: null})
+        };
+
+        saveSupplier = supplier => {
+            this.props.saveCallback(supplier);
+            this.setState({showEditor: false, selected: null})
+        };
+
+        renderSupplierEditor = () => {
+            return <SupplierEditor key={this.state.selected.id}
+                                   supplier={this.state.selected}
+                                   saveCallback={this.saveSupplier}
+                                   cancelCallback={this.cancelEdit}/>
+        };
+
+        render() {
+            if (this.state.showEditor) {
                 return this.renderSupplierEditor()
-        } else {
-            return (
-                <div className="m-2">
-                    <SupplierTable suppliers={ this.props.suppliers }
-                                   editCallback={ this.edit }
-                                   deleteCallback={ this.props.deleteCallback }
-                    />
-                    <div className="text-center">
-                        <button className="btn btn-primary m-1"
-                                onClick={this.createSupplier} >
-                            Create
-                        </button>
+            } else {
+                return (
+                    <div className="m-2">
+                        <SupplierTable suppliers={this.props.suppliers}
+                                       editCallback={this.edit}
+                                       deleteCallback={this.props.deleteCallback}
+                        />
+                        <div className="text-center">
+                            <button className="btn btn-primary m-1"
+                                    onClick={this.createSupplier}>
+                                Create
+                            </button>
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            }
+
         }
-
-    }
-}
-
-export default SupplierDisplay;
+    })
