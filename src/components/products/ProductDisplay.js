@@ -77,6 +77,4 @@ export const ProductDisplay = connection (
 
         }
 
-    })
-
-export default ProductDisplay;
+    });
