@@ -4,7 +4,7 @@ import {initialData} from "./initialData";
 
 export const actionReducer = (storeData, action) => {
 
-    switch (action) {
+    switch (action.type) {
         case STORE:
             return {
                 ...storeData,
