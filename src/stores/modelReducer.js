@@ -2,7 +2,7 @@ import { STORE, DELETE, UPDATE } from "./modelActionTypes";
 import {initialData} from "./initialData";
 
 
-const actionReducer = (storeData, action) => {
+export const actionReducer = (storeData, action) => {
 
     switch (action) {
         case STORE:
@@ -23,9 +23,7 @@ const actionReducer = (storeData, action) => {
                     .filter(p => p.id !== action.payload )
             };
         default:
-            return storeData || initialData
+            return storeData || initialData.modelData
     }
 
 };
-
-export default actionReducer;
