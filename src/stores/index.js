@@ -1,7 +1,14 @@
-import { createStore } from "redux";
-import actionReducer from "./modelReducer";
+import { createStore, combineReducers } from "redux";
 
-export default createStore(actionReducer);
+import { actionReducer as stateReducer } from "./stateReducer";
+import {actionReducer as modelReducer} from "./modelReducer";
+
+const store = combineReducers({
+    modelData: modelReducer,
+    stateData: stateReducer
+});
+
+export default createStore(store);
 
 export {
     saveProduct,
