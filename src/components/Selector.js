@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-// import { ProductDisplay } from "./products/ProductDisplay";
-// import { SupplierDisplay } from "./suppliers/SupplierDisplay";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { ProductDisplay } from "./products/ProductDisplay";
+import { SupplierDisplay } from "./suppliers/SupplierDisplay";
 
 
 class Selector extends Component {
@@ -14,17 +14,16 @@ class Selector extends Component {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-2">
-                            <div><Link to="/data/">Data</Link></div>
-                            <div><Link to="/data/one">Link #1</Link></div>
-                            <div><Link to="/data/two">Link #2</Link></div>
-                            <div><Link to="/people/bob">Bob</Link></div>
+                            <div><Link to="/">Default URL</Link></div>
+                            <div><Link to="/products">Products</Link></div>
+                            <div><Link to="/suppliers">Suppliers</Link></div>
                         </div>
                         <div className="col">
-                            <Route path="/data"
-                                   exact
-                                   render={ () => this.renderMessage("route #1") } />
-                            <Route path="/data/two"
-                                   render={() => this.renderMessage("route #2")}/>
+                            <Switch>
+                                <Route path="/products" component={ ProductDisplay } />
+                                <Route path='/suppliers' component={ SupplierDisplay } />
+                                <Route render={ () => this.renderMessage("Fallback Route") } />
+                            </Switch>
                         </div>
                     </div>
                 </div>
