@@ -1,12 +1,10 @@
 import React, {Component} from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch, Redirect } from "react-router-dom";
 import { ProductDisplay } from "./products/ProductDisplay";
 import { SupplierDisplay } from "./suppliers/SupplierDisplay";
 
 
 class Selector extends Component {
-
-    renderMessage = msg => <h5 className="bg-info text-white m-2 p-2">{ msg }</h5>;
 
     render() {
         return(
@@ -22,7 +20,7 @@ class Selector extends Component {
                             <Switch>
                                 <Route path="/products" component={ ProductDisplay } />
                                 <Route path='/suppliers' component={ SupplierDisplay } />
-                                <Route render={ () => this.renderMessage("Fallback Route") } />
+                                <Redirect to="/products"/>
                             </Switch>
                         </div>
                     </div>
