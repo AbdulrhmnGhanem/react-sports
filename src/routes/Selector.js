@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { BrowserRouter as Router, Link, Route, Switch, Redirect, NavLink } from "react-router-dom";
-import { ProductDisplay } from "./products/ProductDisplay";
-import { SupplierDisplay } from "./suppliers/SupplierDisplay";
+import { ProductDisplay } from "../components/products/ProductDisplay";
+import { SupplierDisplay } from "../components/suppliers/SupplierDisplay";
 
 
 class Selector extends Component {
