@@ -26,3 +26,16 @@ it('updates state data', () => {
     expect(wrapper.state("total"))
         .toBe(values.reduce((total, val) => total + val), 0);
 });
+
+it('Update total when button is clicked', () => {
+    const wrapper = shallow(<App />);
+    const button = wrapper.find('button').first();
+
+    const values = [10, 20, 30];
+    values.forEach((val, index) =>
+        wrapper.instance().updateFieldValue(index + 1, val))
+
+    button.simulate('click');
+
+    expect(wrapper.state('total')).toBe(values.reduce((total, val) => total + val), 0)
+});
